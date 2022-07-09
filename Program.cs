@@ -127,7 +127,7 @@ if(modelName == "Student")
 
     if(modelAction == "ListByCities")
     {
-        string[] cities = new string[args.Count()];
+        string[] cities = new string[args.Count()-2];
         for(int i = 2; i < args.Count(); i++)
         {
             cities[i-2] = args[i];
@@ -140,11 +140,11 @@ if(modelName == "Student")
             {
                 if(student.Former)
                 {
-                    Console.WriteLine($"Prontuário {student.Registration}, {student.Name}, {student.City}, formado");
+                    Console.WriteLine($"{student.Registration}, {student.Name}, {student.City}, formado");
                 }
                 else
                 {
-                    Console.WriteLine($"Prontuário {student.Registration}, {student.Name}, {student.City}, não formado");
+                    Console.WriteLine($"{student.Registration}, {student.Name}, {student.City}, não formado");
                 }
             }
         }

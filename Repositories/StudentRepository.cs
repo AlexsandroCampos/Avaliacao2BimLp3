@@ -29,7 +29,7 @@ public class StudentRepository
         using var connection = new SqliteConnection(_databaseConfig.ConnectionString);
         connection.Open();
 
-        connection.Execute("DELETE FROM Students WHERE registration = @Registration", new { @Registration = registration });
+        connection.Execute("DELETE FROM Students WHERE registration = @Registration", new { Registration = registration });
     }
 
     public void MarkAsFormed(string registration)
@@ -37,7 +37,7 @@ public class StudentRepository
         using var connection = new SqliteConnection(_databaseConfig.ConnectionString);
         connection.Open();
 
-        connection.Execute("UPDATE Students SET former=true WHERE registration=@Registration", new { @Registration = registration });
+        connection.Execute("UPDATE Students SET former=true WHERE registration=@Registration", new { Registration = registration });
     }
 
     public List<Student> GetAll()
@@ -61,7 +61,7 @@ public class StudentRepository
         using var connection = new SqliteConnection(_databaseConfig.ConnectionString);
         connection.Open();
 
-        return connection.Query<Student>("SELECT * FROM Students Where city LIKE @City", new {@City = city+'%'}).ToList();
+        return connection.Query<Student>("SELECT * FROM Students Where city LIKE @City", new {City = city+'%'}).ToList();
     }
 
     public List<Student> GetAllByCities(string[] cities)
@@ -69,7 +69,7 @@ public class StudentRepository
         using var connection = new SqliteConnection(_databaseConfig.ConnectionString);
         connection.Open();
 
-        return connection.Query<Student>("SELECT * FROM Students Where city IN @City", new {@City = cities}).ToList();
+        return connection.Query<Student>("SELECT * FROM Students Where city IN @Cities", new {Cities = cities}).ToList();
     }
 
     public List<CountStudentGroupByAttribute> CountByCities()
@@ -93,6 +93,6 @@ public class StudentRepository
         using var connection = new SqliteConnection(_databaseConfig.ConnectionString);
         connection.Open();
 
-        return connection.ExecuteScalar<bool>("SELECT COUNT(registration) FROM Students WHERE registration = @Registration", new { @Registration = registration});
+        return connection.ExecuteScalar<bool>("SELECT COUNT(registration) FROM Students WHERE registration = @Registration", new { Registration = registration});
     }
 }
